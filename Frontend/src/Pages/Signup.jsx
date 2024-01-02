@@ -1,16 +1,49 @@
 import { useState } from "react";
 import logo from "../assets/Images/logo.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { BASE_URL } from "../../Configuration/config";
+import { toast } from "react-toastify";
+import HashLoader from "react-spinners/HashLoader";
 
 const Signup = () => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
-    gender: "",
+    password: "",
+    gender: "male",
     role: "patient",
   });
+  const [loading, setLoading] = useState(false);
   const handleInputChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const navigate = useNavigate();
+
+  const submitHandler = async (event) => {
+    console.log(formData);
+    event.preventDefault();
+    setLoading(true);
+
+    try {
+      const res = await fetch(`${BASE_URL}/auth/register`, {
+        method: "post",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+      const { message } = await res.json();
+      if (!res.ok) {
+        throw new Error(message);
+      }
+      setLoading(false);
+      toast.success(message);
+      navigate("/login");
+    } catch (error) {
+      toast.error(error.message);
+      setLoading(false);
+    }
   };
 
   return (
@@ -28,7 +61,7 @@ const Signup = () => {
               <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
                 Create an account
               </h1>
-              <form className="space-y-4 md:space-y-6">
+              <form onSubmit={submitHandler} className="space-y-4 md:space-y-6">
                 <div>
                   <label
                     for="name"
@@ -102,7 +135,7 @@ const Signup = () => {
                   >
                     Gender:
                     <select
-                      name="role"
+                      name="gender"
                       value={formData.gender}
                       onChange={handleInputChange}
                       className="text-white font-semibold text-[15px] leading-7 focus:outline-none bg-irisBlueColor"
@@ -139,10 +172,15 @@ const Signup = () => {
                   </div>
                 </div>
                 <button
+                  disabled={loading && true}
                   type="submit"
                   className="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
                 >
-                  Create an account
+                  {loading ? (
+                    <HashLoader size={35} color="#ffffff" />
+                  ) : (
+                    "Create an account"
+                  )}
                 </button>
                 <p className="text-sm text-white">
                   Already have an account?{" "}
