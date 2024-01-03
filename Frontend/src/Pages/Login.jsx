@@ -1,6 +1,9 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import logo from "../assets/Images/logo.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { BASE_URL } from "../../Configuration/config";
+import { toast } from "react-toastify";
+import { authContext } from "../../context/AuthContext.jsx";
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -12,6 +15,48 @@ const Login = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
+  const { dispatch } = useContext(authContext);
+
+  const submitHandler = async (event) => {
+    console.log(formData);
+    event.preventDefault();
+    setLoading(true);
+
+    try {
+      const res = await fetch(`${BASE_URL}/auth/login`, {
+        method: "post",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+      const result = await res.json();
+      if (!res.ok) {
+        throw new Error(result.message);
+      }
+
+      dispatch({
+        type: "LOGIN_SUCCESS",
+        payload: {
+          user: result.data,
+          token: result.token,
+          role: result.role,
+        },
+      });
+
+      console.log(result, "login data");
+
+      setLoading(false);
+      toast.success(result.message);
+      navigate("/home");
+    } catch (error) {
+      toast.error(error.message);
+      setLoading(false);
+    }
+  };
+
   return (
     <div className="hero__section flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-sm">
@@ -21,7 +66,7 @@ const Login = () => {
       </div>
 
       <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-        <form className="space-y-6">
+        <form className="space-y-6" onSubmit={submitHandler}>
           <div>
             <label
               htmlFor="email"

@@ -1,8 +1,9 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useContext } from "react";
 import logo from "../../assets/Images/logo.png";
 import { NavLink, Link } from "react-router-dom";
 import userImg from "../../assets/Images/avatar-icon.png";
 import { BiMenu } from "react-icons/bi";
+import { authContext } from "../../../context/AuthContext";
 
 const navLinks = [
   {
@@ -24,6 +25,8 @@ const navLinks = [
 ];
 
 const Header = () => {
+  const { user, role, token } = useContext(authContext);
+
   return (
     <header className="header flex items-center">
       <div className="container">
@@ -51,6 +54,15 @@ const Header = () => {
           </div>
 
           <div className="flex items-center gap-4">
+            {token && user ? (
+              <h1>{user?.name}</h1>
+            ) : (
+              <Link to="/login">
+                <button className="bg-primaryColor text-white py-2 px-6 font-[600] h-[40px] flex item-center justify-center rounded-[50px]">
+                  Login
+                </button>
+              </Link>
+            )}
             <div>
               <Link to="/">
                 <figure className="w-[35px] h-[35px] rounded-full cursor-pointer">
@@ -62,11 +74,6 @@ const Header = () => {
                 </figure>
               </Link>
             </div>
-            <Link to="/login">
-              <button className="bg-primaryColor text-white py-2 px-6 font-[600] h-[40px] flex item-center justify-center rounded-[50px]">
-                Login
-              </button>
-            </Link>
 
             <span className="md:hidden">
               <BiMenu className="w-6 h-6 cursor-pointer" />
