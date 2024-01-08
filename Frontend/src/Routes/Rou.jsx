@@ -7,7 +7,7 @@ import Signup from "../Pages/Signup";
 import Doctors from "../Pages/Doctors/Doctor";
 import DoctorDetails from "../Pages/Doctors/DoctorDetails";
 import Contacts from "../Pages/Contacts";
-
+import Appoint from "../Pages/Appoint";
 import { Routes, Route } from "react-router-dom";
 
 const Rou = () => {
@@ -21,6 +21,7 @@ const Rou = () => {
       <Route path="/register" element={<Signup />} />
       <Route path="/contact" element={<Contacts />} />
       <Route path="/services" element={<Services />} />
+      <Route path="/appointments" element={<Appoint />} />
     </Routes>
   );
 };

@@ -64,7 +64,7 @@ const Signup = () => {
               <form onSubmit={submitHandler} className="space-y-4 md:space-y-6">
                 <div>
                   <label
-                    for="name"
+                    htmlFor="name"
                     className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                   >
                     Your Full Name
@@ -81,7 +81,7 @@ const Signup = () => {
                 </div>
                 <div>
                   <label
-                    for="email"
+                    htmlFor="email"
                     className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                   >
                     Your email
@@ -98,7 +98,7 @@ const Signup = () => {
                 </div>
                 <div>
                   <label
-                    for="password"
+                    htmlFor="password"
                     className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                   >
                     Password
@@ -158,7 +158,7 @@ const Signup = () => {
 
                   <div className="ml-3 text-sm">
                     <label
-                      for="terms"
+                      htmlFor="terms"
                       className="font-light text-gray-500 dark:text-gray-300"
                     >
                       I accept the{" "}
