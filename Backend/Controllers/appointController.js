@@ -4,33 +4,34 @@ import User from "../models/UserSchema.js";
 
 export const appointment = async (req, res) => {
   const { user, doctor, appointment_date, appointment_reason } = req.body;
-  // const { user } = useContext(authContext);
-  // const { user } = req.user;
+
+  console.log(Date(appointment_date));
 
   try {
-    let doc = null;
-    let user = null;
-    user = await User.findOne({ user });
-    if (!user) {
-      return res.status(404).json({ message: "User Not Found" });
+    const checkUser = await User.findOne({ email: user });
+    if (!checkUser) {
+      return res.status(404).json({ error: "user not found" });
     }
-    doc = await Doctor.findOne({ doctor });
-    if (!doc) {
-      return res.status(404).json({ message: "Doctor Not Found" });
+    const checkDoctor = await Doctor.findOne({ name: doctor });
+    if (!checkDoctor) {
+      return res.status(404).json({ error: "Doctor not found" });
     }
 
     const newAppointment = new Appointment({
-      user: user,
-      doctor: doctor,
-      appointment_time: appointment_date,
-      appointment_reason: appointment_reason,
+      user: checkUser._id,
+      doctor: checkDoctor._id,
+      appointment_time: Date(appointment_date),
+      appointment_reason,
     });
 
-    await doc.save();
-    res
-      .status(200)
-      .json({ success: true, message: "Appointment registered successfully" });
+    const savedAppointment = await newAppointment.save();
+
+    res.status(201).json({
+      message: "Appointment booked successfully",
+      appointment: savedAppointment,
+    });
   } catch (error) {
-    res.status(500).json({ success: false, message: "Internal server error" });
+    console.error("Error creating appointment", error);
+    res.status(500).json({ error: "Internal Server error" });
   }
 };

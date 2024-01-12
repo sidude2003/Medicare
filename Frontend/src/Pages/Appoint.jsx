@@ -16,6 +16,26 @@ const Appoint = () => {
   const submitHandler = async (event) => {
     console.log(formData);
     event.preventDefault();
+    setLoading(true);
+
+    try {
+      const res = await fetch(`${BASE_URL}/appoint/appointment`, {
+        method: "post",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+      const { message } = await res.json();
+      if (!res.ok) {
+        throw new Error(message);
+      }
+      setLoading(false);
+      toast.success(message);
+    } catch (error) {
+      toast.error(error.message);
+      setLoading(false);
+    }
   };
   return (
     <div className="hero__section flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
