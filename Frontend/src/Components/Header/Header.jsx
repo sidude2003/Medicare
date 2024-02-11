@@ -70,7 +70,7 @@ const Header = () => {
             {token && user ? (
               <form className="space-y-6" onSubmit={logout}>
                 <div className="flex justify-content">
-                  <h1 className="menu flex items-center">{user?.name}</h1>
+                  <h1 className="menu flex items-center mr-7">{user?.name}</h1>
                   <Link onClick={logout}>
                     <button className="bg-primaryColor text-white py-2 px-6 font-[600] h-[40px] flex item-center justify-center rounded-[50px]">
                       Logout

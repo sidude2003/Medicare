@@ -5,7 +5,7 @@ import doctorImg03 from "../images/doctor-img03.png";
 export const doctors = [
   {
     id: "01",
-    name: "Dr. Mayur Kulkarni",
+    name: "Dr. Gaurav Narayanan",
     specialty: "Surgeon",
     avgRating: 4.8,
     totalRating: 272,
@@ -27,7 +27,7 @@ export const doctors = [
     id: "03",
     name: "Dr. Kunal Hunduja",
     specialty: "Dermatologist",
-    avgRating: 4.8,
+    avgRating: -2.1,
     totalRating: 272,
     photo: doctorImg03,
     totalPatients: 1500,
