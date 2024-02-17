@@ -36,11 +36,23 @@ const Home = () => {
             </div>
             <div className="flex gap-[30px] justify-end">
               <div>
-                <img className="w-full" src={heroImg01} alt="" />
+                <img
+                  className="w-full rounded-3xl shadow-2xl shadow-black bg-blend-normal"
+                  src={heroImg01}
+                  alt=""
+                />
               </div>
               <div>
-                <img className="w-full mb-[30px]" src={heroImg02} alt="" />
-                <img className="w-full" src={heroImg03} alt="" />
+                <img
+                  className="w-full mb-[30px] shadow-2xl shadow-black rounded-3xl"
+                  src={heroImg02}
+                  alt=""
+                />
+                <img
+                  className="w-full shadow-2xl shadow-black rounded-3xl"
+                  src={heroImg03}
+                  alt=""
+                />
               </div>
             </div>
           </div>

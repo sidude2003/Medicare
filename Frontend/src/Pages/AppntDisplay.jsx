@@ -3,6 +3,7 @@ import { useState } from "react";
 import { BASE_URL } from "../../Configuration/config";
 import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
+import DisplayList from "../Components/DoctorDisplay/DisplayList";
 
 export const AppntDisplay = () => {
   return (
