@@ -28,7 +28,7 @@ const Home = () => {
                   aliquam quas recusandae animi est incidunt impedit.
                 </p>
                 <Link to="/appointments">
-                  <button className="bg-primaryColor text-white py-2 px-6 font-[600] rounded-[50px] mt-4">
+                  <button className="bg-primaryColor transition ease-in-out delay-110 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300 text-white py-2 px-6 font-[600] rounded-[50px] mt-4">
                     Request Appointment
                   </button>
                 </Link>

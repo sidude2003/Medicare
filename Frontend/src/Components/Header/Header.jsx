@@ -70,9 +70,11 @@ const Header = () => {
             {token && user ? (
               <form className="space-y-6" onSubmit={logout}>
                 <div className="flex justify-content">
-                  <h1 className="menu flex items-center mr-7">{user?.name}</h1>
+                  <h1 className="menu flex items-center mr-7 animate-text bg-gradient-to-r from-teal-500 via-purple-500 to-orange-500 bg-clip-text text-red-600 text-transparent font-bold">
+                    {user?.name}
+                  </h1>
                   <Link onClick={logout}>
-                    <button className="bg-primaryColor text-white py-2 px-6 font-[600] h-[40px] flex item-center justify-center rounded-[50px]">
+                    <button className="bg-primaryColor text-white py-2 px-6 font-[600] h-[40px] flex item-center justify-center rounded-[50px] transition ease-in-out delay-110 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300">
                       Logout
                     </button>
                   </Link>
@@ -80,7 +82,7 @@ const Header = () => {
               </form>
             ) : (
               <Link to="/login">
-                <button className="bg-primaryColor text-white py-2 px-6 font-[600] h-[40px] flex item-center justify-center rounded-[50px]">
+                <button className="bg-primaryColor text-white py-2 px-6 font-[600] h-[40px] flex item-center justify-center rounded-[50px] transition ease-in-out delay-110 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300">
                   Login
                 </button>
               </Link>
