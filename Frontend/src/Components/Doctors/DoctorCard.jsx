@@ -19,7 +19,7 @@ const DoctorCard = ({ doctor }) => {
       <div className="text-[16px] leading-7 font-[400] text-textColor mt-4">
         {name}
       </div>
-      <p class="text-[12px] bg-irisBlueColor py-0.5 px-1.5 rounded-8 inline-block">
+      <p className="text-[12px] bg-irisBlueColor py-0.5 px-1.5 rounded-8 inline-block">
         {specialty}
       </p>
     </div>

@@ -2,7 +2,7 @@ import express from "express";
 const router = express.Router();
 import Doctor from "../models/DoctorSchema.js";
 
-router.get("/doctors", async (req, res) => {
+router.get("/find", async (req, res) => {
   try {
     const doctors = await Doctor.find();
     res.json(doctors);
@@ -12,4 +12,4 @@ router.get("/doctors", async (req, res) => {
   }
 });
 
-module.exports = router;
+export default router;
